@@ -1,0 +1,42 @@
+server:
+  port: 8888
+  compression.enabled: true
+
+  tomcat:
+    max-threads: 1000
+    max-connections: 10000
+    min-spare-threads: 5
+    uri-encoding: UTF-8
+
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        domain: /
+spring:
+  datasource:
+    druid:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      initialSize: 5
+      maxActive: 8
+      testOnBorrow: true
+      validationQuery: SELECT 1
+    aliYun:
+      url: jdbc:mysql://47.102.113.10:3306/aliyun?serverTimezone=Asia/Shanghai
+      username: ecjtu
+      password: ganlunwen666
+    paper:
+      url: jdbc:mysql://148.70.99.81:3306/paper?serverTimezone=Asia/Shanghai
+      username: root
+      password: Ganlunwen888.
+
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+
+mybatis-plus:
+  config-location: 'classpath:/mapper/**/*Mapper.xml'
