@@ -78,6 +78,27 @@ public class MybatisPlusConfig implements ApplicationContextAware {
         return paginationInterceptor;
     }
 
+    /**
+     * 配置mybatis的sqlSessionFactory
+     * @return     {@link SqlSessionFactory}
+     * @throws      {@link Exception}
+     */
+    @Bean("sqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+        sqlSessionFactory.setDataSource(multipleDataSource(aliYun(),paper()));
+        MybatisConfiguration configuration = new MybatisConfiguration();
+        configuration.setJdbcTypeForNull(JdbcType.NULL);
+        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setCacheEnabled(false);
+        sqlSessionFactory.setConfiguration(configuration);
+        sqlSessionFactory.setMapperLocations(applicationContext.getResources(mapperLocations));
+        sqlSessionFactory.setPlugins(new Interceptor[]{
+                paginationInterceptor()
+        });
+        return sqlSessionFactory.getObject();
+    }
+
     @Bean("aliYun")
     public DataSource aliYun() {
         DruidDataSource druidDataSource = initDruidDataSource();
@@ -117,24 +138,10 @@ public class MybatisPlusConfig implements ApplicationContextAware {
     }
 
 
-
-    @Bean("sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
-        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(multipleDataSource(aliYun(),paper()));
-        MybatisConfiguration configuration = new MybatisConfiguration();
-        configuration.setJdbcTypeForNull(JdbcType.NULL);
-        configuration.setMapUnderscoreToCamelCase(true);
-        configuration.setCacheEnabled(false);
-        sqlSessionFactory.setConfiguration(configuration);
-        sqlSessionFactory.setMapperLocations(applicationContext.getResources(mapperLocations));
-        sqlSessionFactory.setPlugins(new Interceptor[]{
-                paginationInterceptor()
-        });
-        return sqlSessionFactory.getObject();
-    }
-
-
+    /**
+     * 初始化数据源
+     * @return
+     */
     private DruidDataSource initDruidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(driverClassName);
