@@ -22,13 +22,16 @@ spring:
       testOnBorrow: true
       validationQuery: SELECT 1
     aliYun:
-      url: jdbc:mysql://**********/aliyun?serverTimezone=Asia/Shanghai
-      username: root
-      password: root
+      url: jdbc:mysql://47.102.113.10:3306/aliyun?serverTimezone=Asia/Shanghai
+      username: ecjtu
+      password: ganlunwen666
     paper:
-      url: jdbc:mysql://**********/paper?serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://148.70.99.81:3306/paper?serverTimezone=Asia/Shanghai
       username: root
-      password: root.
+      password: Ganlunwen888.
+
+mybatis-plus:
+  config-location: 'classpath:/mapper/**/*Mapper.xml'
 
 
   devtools:
@@ -38,5 +41,3 @@ spring:
       enabled: true
       additional-paths: src/main/java
 
-mybatis-plus:
-  config-location: 'classpath:/mapper/**/*Mapper.xml'

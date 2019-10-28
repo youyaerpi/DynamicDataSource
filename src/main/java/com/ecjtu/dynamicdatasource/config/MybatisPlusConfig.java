@@ -59,7 +59,7 @@ public class MybatisPlusConfig implements ApplicationContextAware {
     private String paperPassword;
 
 
-    private ApplicationContext applicationContext;
+    private static ApplicationContext applicationContext;
 
     @Value("${mybatis-plus.config-location}")
     private String mapperLocations;
