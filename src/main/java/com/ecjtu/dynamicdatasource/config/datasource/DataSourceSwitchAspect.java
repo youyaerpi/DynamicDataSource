@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class DataSourceSwitchAspect {
     /**
-     * 切点
+     * 切点(也可基于注解)
      * 在paper包下切入
      */
     @Pointcut("execution(* com.ecjtu.dynamicdatasource.mapper.paper..*.*(..))")

@@ -13,6 +13,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -99,6 +100,7 @@ public class MybatisPlusConfig implements ApplicationContextAware {
     }
 
     @Bean("aliYun")
+
     public DataSource aliYun() {
         DruidDataSource druidDataSource = initDruidDataSource();
         druidDataSource.setUrl(aliYunUrl);
